@@ -1,27 +1,86 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Home</title>
-<style>
-body
-{
-    background-image: url("https://stat.overdrive.in/wp-content/uploads/2021/10/2021-jaguar-xf-facelift-india-01.jpg");
-    background-size: cover;
-}
-.pd{
-padding-bottom:45%;}
-}
-</style>
+  <meta charset="UTF-8">
+  <title>Traffic Volume Prediction Result</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Background image */
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-image: url("https://stat.overdrive.in/wp-content/uploads/2021/10/2021-jaguar-xf-facelift-india-01.jpg");
+      background-size: cover;
+      background-position: center;
+      z-index: -2;
+    }
+
+    /* White transparent overlay for better contrast */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.3); /* You can reduce to 0.2 if needed */
+      z-index: -1;
+    }
+
+    .result-box {
+      position: relative;
+      top: 20%;
+      margin: auto;
+      width: fit-content;
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0px 0px 15px gray;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 40px;
+      margin-bottom: 20px;
+      color: #000;
+    }
+
+    p {
+      font-size: 24px;
+      color: #000;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+      background-color: black;
+      padding: 10px 25px;
+      border-radius: 6px;
+      margin-top: 20px;
+      display: inline-block;
+    }
+
+    a:hover {
+      background-color: #333;
+    }
+  </style>
 </head>
 <body>
+  <div class="background"></div>
+  <div class="overlay"></div>
 
-<br>
-<center><b class="pd"><font color="black" size="15" font-family="Comic Sans MS" >Traffic volume estimation</font></b></center><br><br>
-<div>
-<br>
-<center>
-<p><font color="black"> {{result}} </p>  
-</center>
-</div>
+  <div class="result-box">
+    <h1>Traffic Volume Estimation</h1>
+    <p>{{ result }}</p>
+    <a href="/">Predict Again</a>
+  </div>
 </body>
 </html>
