@@ -1,5 +1,5 @@
 # Traffic-Telligence-Advanced-Traffic-Volume-Estimation-with-Machine-Learning-project  
-Absolutely! Here's a **longer, more detailed `README.md`** for your **TrafficTelligence** project. This version includes in-depth explanations, visuals section (you can later add screenshots), deployment notes, and future improvements.
+Absolutely! Here's a **longer, more detailed `README.md`** for ,my **TrafficTelligence** project. This version includes in-depth explanations, visuals section , deployment notes, and future improvements.
 
 ---
 
