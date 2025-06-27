@@ -1,10 +1,34 @@
-flask
-numpy
-pandas
-scikit-learn
-matplotlib
-seaborn
-joblib
+.flask
+Purpose: Used to build web applications.
+In your project: Creates the user interface (UI) to collect user inputs and display predicted traffic volume
+
+.numpy
+Purpose: Supports numerical operations, especially for arrays and math functions.
+In your project: Converts user inputs to NumPy arrays for model prediction
+
+.pandas
+Purpose: Handles data loading, cleaning, and transformation using DataFrames.
+In your project: Reads the CSV file, preprocesses features, and creates input for ML model
+
+.scikit-learn
+purpose: Machine learning library with tools for model training, evaluation, and preprocessing.
+In your project:
+RandomForestRegressor for training your prediction model.
+train_test_split to split dataset.
+mean_squared_error for evaluation.
+
+.matplotlib
+purpose: Used for plotting graphs and charts.
+In your project: Visualizes traffic trends and predictions.
+
+.seaborn
+Purpose: Built on matplotlib for more beautiful and informative visualizations.
+In your project: Correlation heatmaps, boxplots, and trend graphs.
+
+
+.joblib
+Purpose: Saves and loads trained machine learning models.
+In your project: Used to save the .pkl model file (model.pkl) for Flask to use
 
 | Library      | Purpose                 | Used For                            |
 | ------------ | ----------------------- | ----------------------------------- |
