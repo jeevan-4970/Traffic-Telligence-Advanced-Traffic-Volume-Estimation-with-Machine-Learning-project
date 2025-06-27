@@ -6,3 +6,12 @@ matplotlib
 seaborn
 joblib
 
+| Library      | Purpose                 | Used For                            |
+| ------------ | ----------------------- | ----------------------------------- |
+| flask        | Web app development     | User input, routing, results        |
+| numpy        | Numerical computations  | Converting input to array           |
+| pandas       | Data handling           | Reading and processing dataset      |
+| scikit-learn | Machine Learning        | Model training, testing, prediction |
+| matplotlib   | Data visualization      | Line plots, comparison graphs       |
+| seaborn      | Enhanced visualizations | Heatmaps, boxplots                  |
+| joblib       | Model serialization     | Saving/loading trained model        |
