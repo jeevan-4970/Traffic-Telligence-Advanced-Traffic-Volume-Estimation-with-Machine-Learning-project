@@ -1,0 +1,63 @@
+import numpy as np
+import pandas as pd
+import pickle
+import os
+from flask import Flask, request, render_template
+
+# Initialize Flask app
+app = Flask(__name__, template_folder='template')
+
+# Load model
+model_path = os.path.join('model.pkl')
+model = pickle.load(open(model_path, 'rb'))
+
+# Load encoders
+encoder_path = os.path.join('encoder.pkl')
+with open(encoder_path, 'rb') as f:
+    encoders = pickle.load(f)
+
+@app.route('/')
+def index():
+    return render_template('index.html')  # Your input form
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    try:
+        # Get values from form
+        form_data = request.form
+
+        # Encode categorical inputs using LabelEncoder
+        holiday = encoders['holiday'].transform([form_data['holiday']])[0]
+        weather = encoders['weather'].transform([form_data['weather']])[0]
+
+        # Get numeric fields from the form
+        temp = float(form_data['temp'])
+        rain = float(form_data['rain'])
+        snow = float(form_data['snow'])
+        year = int(form_data['year'])
+        month = int(form_data['month'])
+        day = int(form_data['day'])
+        hours = int(form_data['hours'])
+        minutes = int(form_data['minutes'])
+        seconds = int(form_data['seconds'])
+
+        # Arrange in the order expected by model
+        input_features = [[holiday, temp, rain, snow, weather,
+                           year, month, day, hours, minutes, seconds]]
+
+        # Convert to DataFrame
+        column_names = ['holiday', 'temp', 'rain', 'snow', 'weather', 
+                        'year', 'month', 'day', 'hours', 'minutes', 'seconds']
+        input_df = pd.DataFrame(input_features, columns=column_names)
+
+        # Make prediction
+        prediction = model.predict(input_df)[0]
+
+        return render_template('output.html', result=f"Estimated Traffic Volume is: {int(prediction)} units")
+
+    except Exception as e:
+        return render_template('output.html', result=f"❌ Error: {str(e)}")
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=True, port=port)
