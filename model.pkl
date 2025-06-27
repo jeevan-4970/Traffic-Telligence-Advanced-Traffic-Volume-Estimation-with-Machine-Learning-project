@@ -1,1 +1,50 @@
+import pandas as pd
+import numpy as np
+import pickle
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split
 
+# Load CSV
+df = pd.read_csv("traffic volume (1).csv")  # Make sure this CSV is in the same folder
+
+# Combine date and time into datetime
+df['datetime'] = pd.to_datetime(df['date'] + ' ' + df['Time'])
+
+# Extract time-based features
+df['year'] = df['datetime'].dt.year
+df['month'] = df['datetime'].dt.month
+df['day'] = df['datetime'].dt.day
+df['hours'] = df['datetime'].dt.hour
+df['minutes'] = df['datetime'].dt.minute
+df['seconds'] = df['datetime'].dt.second
+
+# Drop unnecessary columns
+df = df.drop(columns=['date', 'Time', 'datetime'])
+
+# Encode categorical variables
+df['holiday'] = df['holiday'].astype('category').cat.codes
+df['weather'] = df['weather'].astype('category').cat.codes
+
+# Remove rows with missing data
+df.dropna(inplace=True)
+
+# Features & Target
+features = ['holiday', 'temp', 'rain', 'snow', 'weather',
+            'year', 'month', 'day', 'hours', 'minutes', 'seconds']
+target = 'traffic_volume'
+
+X = df[features]
+y = df[target]
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train model
+model = RandomForestRegressor(n_estimators=100, random_state=42)
+model.fit(X_train, y_train)
+
+# Save the model
+with open("model.pkl", "wb") as f:
+    pickle.dump(model, f)
+
+print("✅ model.pkl has been saved successfully.")
